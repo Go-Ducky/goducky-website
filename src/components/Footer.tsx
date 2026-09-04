@@ -30,15 +30,7 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="flex-1 text-center py-5 text-sm border-l border-border-weak text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
         >
-          Discord
-        </a>
-        <a
-          href="https://github.com/Go-Ducky/goducky-cli"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 text-center py-5 text-sm border-l border-border-weak text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
-        >
-          CLI
+          Discord (Coming Soon)
         </a>
       </div>
 
