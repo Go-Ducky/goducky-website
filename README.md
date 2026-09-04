@@ -10,6 +10,7 @@ The official website for GoDucky - the open source AI coding agent. Built with N
 - Light / Dark / System theme toggle
 - Terminal-style install command tabs (curl, npm, bun, brew, paru)
 - Real waitlist email signup form with API route
+- Live GitHub stats auto-updated in real-time (refresh every 60s)
 - Full Privacy Policy and Terms of Service pages
 - Documentation landing page
 - Download page with platform-specific install commands
@@ -26,6 +27,7 @@ The official website for GoDucky - the open source AI coding agent. Built with N
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Service |
 | `/api/waitlist` | POST endpoint for email waitlist signup |
+| `/api/github-stats` | GET endpoint returning live GitHub org stats |
 
 ## Tech Stack
 
@@ -88,7 +90,19 @@ vercel
 3. Import the `Go-Ducky/goducky-website` repository
 4. Click **Deploy**
 
-Vercel will automatically detect Next.js and configure build settings. No environment variables required.
+Vercel will automatically detect Next.js and configure build settings.
+
+### Waitlist Storage (Vercel KV / Upstash)
+
+The waitlist endpoint stores emails in [Vercel KV](https://vercel.com/docs/storage/vercel-kv) (Upstash Redis) when the connection env vars are present, and falls back to a local `waitlist-data.json` file for local development (this file is gitignored).
+
+**To make the waitlist persist in production:**
+
+1. In your [Vercel dashboard](https://vercel.com), open the project → **Storage** → **Create Database** → **KV** (Upstash).
+2. Enable **“Connect to project”** so Vercel auto-adds the `KV_REST_API_URL` and `KV_REST_API_TOKEN` env vars.
+3. Redeploy (or run `vercel env pull` locally).
+
+After that, every waitlist signup is stored in the KV store under the `goducky:waitlist` set. You can view/expose them via the Upstash console or the Vercel storage dashboard.
 
 ## Project Structure
 
@@ -106,8 +120,10 @@ goducky-website/
 │   │   ├── terms/page.tsx       # Terms of Service
 │   │   ├── docs/page.tsx        # Documentation
 │   │   ├── download/page.tsx    # Download page
-│   │   └── api/waitlist/
-│   │       └── route.ts         # Waitlist API endpoint
+│   │   ├── api/waitlist/
+│   │   │   └── route.ts         # Waitlist API endpoint (KV/Upstash)
+│   │   └── api/github-stats/
+│   │       └── route.ts         # Live GitHub org stats endpoint
 │   └── components/
 │       ├── Header.tsx           # Sticky nav with theme toggle
 │       ├── ThemeToggle.tsx      # Light/Dark/System switch
@@ -137,4 +153,4 @@ MIT License
 ## Links
 
 - [GitHub](https://github.com/Go-Ducky)
-- [Website](https://goducky.dev)
+- [Website](https://goducky.org)

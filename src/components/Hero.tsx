@@ -36,14 +36,6 @@ export default function Hero() {
 
   return (
     <section className="flex flex-col items-center pt-24 pb-16 px-4">
-      <div className="inline-flex items-center gap-2 rounded bg-background-strong text-text-inverted text-xs px-2 py-1 mb-8">
-        <span>[New]</span>
-        <span>Introducing the GoDucky desktop app. Available on macOS, Windows, and Linux.</span>
-        <a href="#" className="underline hover:opacity-80">
-          Download now
-        </a>
-      </div>
-
       <h1 className="font-sans text-3xl sm:text-[38px] font-bold leading-tight text-text-strong mb-2">
         The open source AI coding agent
       </h1>

@@ -31,6 +31,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# waitlist local dev data (do not commit emails)
+waitlist-data.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

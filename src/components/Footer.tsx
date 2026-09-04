@@ -33,23 +33,17 @@ export default function Footer() {
           Discord
         </a>
         <a
-          href="https://lordpipon.com"
+          href="https://github.com/Go-Ducky/goducky-cli"
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1 text-center py-5 text-sm border-l border-border-weak text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
         >
-          Founder
+          CLI
         </a>
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-between py-5 px-5 text-xs text-text-weak border-t border-border-weak gap-2">
         <span>©2026 GoDucky</span>
-        <a
-          href="mailto:goduckysupport@proton.me"
-          className="text-text-weak hover:text-text-strong no-underline transition-colors"
-        >
-          Contact: goduckysupport@proton.me
-        </a>
         <div className="flex gap-4">
           <Link
             href="/privacy"
