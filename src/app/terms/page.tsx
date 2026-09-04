@@ -58,7 +58,7 @@ export default function TermsPage() {
             <p>UNDER NO CIRCUMSTANCES SHALL GO DUCKY BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY AMOUNT IN EXCESS OF THE GREATER OF $100 OR THE AMOUNTS PAID BY YOU TO GO DUCKY IN THE TWELVE (12) MONTH PERIOD PRECEDING THE APPLICABLE CLAIM.</p>
 
             <h2 className="text-lg font-bold mt-8 mb-4">Contact Us</h2>
-            <p>If you have any questions about these Terms, please contact us at <a href="mailto:legal@goducky.dev" className="text-text-weak hover:text-text-strong">legal@goducky.dev</a>.</p>
+            <p>If you have any questions about these Terms, please contact us at <a href="mailto:goduckysupport@proton.me" className="text-text-weak hover:text-text-strong">goduckysupport@proton.me</a>.</p>
           </div>
         </div>
       </main>

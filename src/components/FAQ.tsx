@@ -55,32 +55,42 @@ export default function FAQ() {
         <h3 className="text-base font-bold text-text-strong mb-8 font-sans">
           FAQ
         </h3>
-        {faqItems.map((item, index) => (
-          <div key={index} className="mb-6">
-            <button
-              className="w-full text-left flex items-center justify-between py-2"
-              onClick={() =>
-                setOpenIndex(openIndex === index ? null : index)
-              }
-            >
-              <span className="font-medium text-text-strong text-sm">
-                {item.question}
-              </span>
-              {openIndex === index ? (
-                <Minus className="w-6 h-6 shrink-0 text-text-weak" />
-              ) : (
-                <Plus className="w-6 h-6 shrink-0 text-text-weak" />
-              )}
-            </button>
-            <div
-              className={`faq-answer ${openIndex === index ? "open" : ""}`}
-            >
-              <p className="ml-10 mt-1 mb-2 text-text text-sm leading-relaxed">
-                {item.answer}
-              </p>
-            </div>
-          </div>
-        ))}
+        <div className="divide-y divide-border-weak border-y border-border-weak">
+          {faqItems.map((item, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div key={index}>
+                <button
+                  className="w-full flex items-center justify-between gap-4 py-4 text-left"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  aria-expanded={isOpen}
+                >
+                  <span className="font-medium text-text-strong text-sm flex-1">
+                    {item.question}
+                  </span>
+                  {isOpen ? (
+                    <Minus className="w-5 h-5 shrink-0 text-text-weak" />
+                  ) : (
+                    <Plus className="w-5 h-5 shrink-0 text-text-weak" />
+                  )}
+                </button>
+                <div
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100 pb-4"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden ml-8">
+                    <p className="text-text text-sm leading-relaxed">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

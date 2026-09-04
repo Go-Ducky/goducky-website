@@ -20,6 +20,7 @@ The official website for GoDucky - the open source AI coding agent. Built with N
 | Route | Description |
 |-------|-------------|
 | `/` | Home page with hero, features, stats, FAQ, waitlist |
+| `/about` | About page with founder (lordpipon) info and socials |
 | `/docs` | Documentation landing page |
 | `/download` | Platform-specific installation commands |
 | `/privacy` | Privacy Policy |
@@ -100,6 +101,7 @@ goducky-website/
 │   │   ├── globals.css          # Design tokens (light/dark)
 │   │   ├── layout.tsx           # Root layout
 │   │   ├── page.tsx             # Home page
+│   │   ├── about/page.tsx       # About + founder
 │   │   ├── privacy/page.tsx     # Privacy Policy
 │   │   ├── terms/page.tsx       # Terms of Service
 │   │   ├── docs/page.tsx        # Documentation

@@ -63,7 +63,7 @@ export default function PrivacyPage() {
             <p>We may need to change this Privacy Policy from time to time. We will alert you of material changes by placing a notice on our website, by sending you an email and/or by some other means.</p>
 
             <h2 className="text-lg font-bold mt-8 mb-4">Contact Us</h2>
-            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@goducky.dev" className="text-text-weak hover:text-text-strong">privacy@goducky.dev</a>.</p>
+            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:goduckysupport@proton.me" className="text-text-weak hover:text-text-strong">goduckysupport@proton.me</a>.</p>
           </div>
         </div>
       </main>

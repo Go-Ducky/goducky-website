@@ -37,6 +37,12 @@ export default function Header() {
           Docs
         </a>
         <Link
+          href="/about"
+          className="text-sm text-text-weak hover:text-text-strong no-underline"
+        >
+          About
+        </Link>
+        <Link
           href="/download"
           className="btn-primary flex items-center gap-2"
         >
@@ -75,6 +81,13 @@ export default function Header() {
           >
             Docs
           </a>
+          <Link
+            href="/about"
+            className="text-sm text-text-weak hover:text-text-strong no-underline"
+            onClick={() => setMenuOpen(false)}
+          >
+            About
+          </Link>
           <Link
             href="/download"
             className="btn-primary flex items-center gap-2 w-fit"

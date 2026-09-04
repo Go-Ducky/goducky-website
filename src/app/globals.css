@@ -38,26 +38,6 @@
   --color-icon: hsl(10, 3%, 43%);
 }
 
-@theme inline {
-  --color-background: var(--color-background);
-  --color-background-weak: var(--color-background-weak);
-  --color-background-weak-hover: var(--color-background-weak-hover);
-  --color-background-strong: var(--color-background-strong);
-  --color-background-strong-hover: var(--color-background-strong-hover);
-  --color-background-interactive: var(--color-background-interactive);
-  --color-background-interactive-weaker: var(--color-background-interactive-weaker);
-  --color-text: var(--color-text);
-  --color-text-weak: var(--color-text-weak);
-  --color-text-weaker: var(--color-text-weaker);
-  --color-text-strong: var(--color-text-strong);
-  --color-text-inverted: var(--color-text-inverted);
-  --color-border: var(--color-border);
-  --color-border-weak: var(--color-border-weak);
-  --color-icon: var(--color-icon);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 html {
   scroll-behavior: smooth;
 }
