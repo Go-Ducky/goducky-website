@@ -6,11 +6,25 @@ The official website for GoDucky - the open source AI coding agent. Built with N
 
 ## Features
 
-- Modern, responsive design
+- Modern, responsive design matching opencode.ai aesthetic
 - Light / Dark / System theme toggle
-- Smooth animations and transitions
+- Terminal-style install command tabs (curl, npm, bun, brew, paru)
+- Real waitlist email signup form with API route
+- Full Privacy Policy and Terms of Service pages
+- Documentation landing page
+- Download page with platform-specific install commands
 - Mobile-friendly navigation
-- SEO optimized
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home page with hero, features, stats, FAQ, waitlist |
+| `/docs` | Documentation landing page |
+| `/download` | Platform-specific installation commands |
+| `/privacy` | Privacy Policy |
+| `/terms` | Terms of Service |
+| `/api/waitlist` | POST endpoint for email waitlist signup |
 
 ## Tech Stack
 
@@ -32,7 +46,7 @@ The official website for GoDucky - the open source AI coding agent. Built with N
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/go-ducky/goducky-website.git
+git clone https://github.com/Go-Ducky/goducky-website.git
 cd goducky-website
 ```
 
@@ -40,20 +54,12 @@ cd goducky-website
 
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
 ```
 
 3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -69,117 +75,58 @@ npm run start
 
 ### Option 1: Deploy via Vercel CLI
 
-1. Install Vercel CLI:
-
 ```bash
 npm i -g vercel
-```
-
-2. Run the deployment:
-
-```bash
 vercel
 ```
 
-3. Follow the prompts to link your project to Vercel.
+### Option 2: Deploy via Git (Recommended)
 
-### Option 2: Deploy via Git
-
-1. Push your code to GitHub:
-
-```bash
-git remote add origin https://github.com/go-ducky/goducky-website.git
-git push -u origin main
-```
-
+1. Push your code to GitHub
 2. Go to [vercel.com/new](https://vercel.com/new)
+3. Import the `Go-Ducky/goducky-website` repository
+4. Click **Deploy**
 
-3. Import your GitHub repository
-
-4. Vercel will automatically detect Next.js and configure the build settings
-
-5. Click **Deploy**
-
-### Option 3: Deploy via Vercel Dashboard
-
-1. Fork or push this repository to your GitHub account
-
-2. Visit [vercel.com/dashboard](https://vercel.com/dashboard)
-
-3. Click **New Project**
-
-4. Select your repository
-
-5. Keep the default settings and click **Deploy**
-
-### Environment Variables
-
-No environment variables are required for the basic website. If you add features that require them, create a `.env.local` file:
-
-```env
-NEXT_PUBLIC_SITE_URL=https://goducky.dev
-```
+Vercel will automatically detect Next.js and configure build settings. No environment variables required.
 
 ## Project Structure
 
 ```
 goducky-website/
 ├── public/
-│   └── logo.jpeg              # GoDucky logo
+│   └── logo.jpeg
 ├── src/
 │   ├── app/
-│   │   ├── globals.css        # Global styles with theme variables
-│   │   ├── layout.tsx         # Root layout with ThemeProvider
-│   │   └── page.tsx           # Home page
+│   │   ├── globals.css          # Design tokens (light/dark)
+│   │   ├── layout.tsx           # Root layout
+│   │   ├── page.tsx             # Home page
+│   │   ├── privacy/page.tsx     # Privacy Policy
+│   │   ├── terms/page.tsx       # Terms of Service
+│   │   ├── docs/page.tsx        # Documentation
+│   │   ├── download/page.tsx    # Download page
+│   │   └── api/waitlist/
+│   │       └── route.ts         # Waitlist API endpoint
 │   └── components/
-│       ├── Header.tsx         # Navigation header with mobile menu
-│       ├── Hero.tsx           # Hero section with terminal animation
-│       ├── Features.tsx       # Features grid
-│       ├── Stats.tsx          # Statistics section
-│       ├── Privacy.tsx        # Privacy section
-│       ├── FAQ.tsx            # FAQ accordion
-│       ├── CTA.tsx            # Call to action / newsletter
-│       ├── Footer.tsx         # Footer
-│       ├── ThemeProvider.tsx   # next-themes provider wrapper
-│       └── ThemeToggle.tsx    # Light / Dark / System toggle button
+│       ├── Header.tsx           # Sticky nav with theme toggle
+│       ├── ThemeToggle.tsx      # Light/Dark/System switch
+│       ├── ThemeProvider.tsx    # next-themes wrapper
+│       ├── Hero.tsx             # Install tabs + banner
+│       ├── Features.tsx         # Feature list
+│       ├── Stats.tsx            # GitHub stats
+│       ├── Privacy.tsx          # Privacy blurb
+│       ├── FAQ.tsx              # Accordion FAQ
+│       ├── Waitlist.tsx         # Email signup form
+│       └── Footer.tsx           # Footer + legal bar
 ├── package.json
 ├── tailwind.config.js
+├── postcss.config.js
 ├── tsconfig.json
-├── next.config.js
-└── postcss.config.js
+└── next.config.js
 ```
 
 ## Customization
 
-### Changing Theme Colors
-
-Edit the CSS variables in `src/app/globals.css` to customize the color scheme:
-
-```css
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  /* ... */
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  /* ... */
-}
-```
-
-### Adding New Sections
-
-Create new components in `src/components/` and import them in `src/app/page.tsx`.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Edit CSS custom properties in `src/app/globals.css` to change the color scheme. The design tokens follow HSL values for both light and dark modes.
 
 ## License
 
@@ -187,5 +134,5 @@ MIT License
 
 ## Links
 
-- [GitHub](https://github.com/go-ducky)
+- [GitHub](https://github.com/Go-Ducky)
 - [Website](https://goducky.dev)

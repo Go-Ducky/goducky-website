@@ -1,51 +1,64 @@
-export function Footer() {
-  const footerLinks = [
-    { label: "GitHub", href: "https://github.com/go-ducky" },
-    { label: "Docs", href: "#docs" },
-    { label: "Changelog", href: "#" },
-    { label: "Discord", href: "#" },
-  ];
+import Link from "next/link";
 
-  const legalLinks = [
-    { label: "Privacy", href: "#" },
-    { label: "Terms", href: "#" },
-  ];
-
+export default function Footer() {
   return (
-    <footer className="border-t border-border py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex items-center gap-3">
-            <img src="/logo.jpeg" alt="GoDucky" className="w-6 h-6 rounded-md object-cover" />
-            <span className="font-semibold">GoDucky</span>
-          </div>
+    <footer className="bg-background">
+      <div className="hidden md:flex border-t border-border-weak">
+        <a
+          href="https://github.com/go-ducky"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 text-center py-5 text-sm border-l border-border-weak first:border-l-0 text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
+        >
+          GitHub
+        </a>
+        <Link
+          href="/docs"
+          className="flex-1 text-center py-5 text-sm border-l border-border-weak text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
+        >
+          Docs
+        </Link>
+        <a
+          href="#"
+          className="flex-1 text-center py-5 text-sm border-l border-border-weak text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
+        >
+          Changelog
+        </a>
+        <a
+          href="#"
+          className="flex-1 text-center py-5 text-sm border-l border-border-weak text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
+        >
+          Discord
+        </a>
+        <a
+          href="#"
+          className="flex-1 text-center py-5 text-sm border-l border-border-weak text-text-weak hover:text-text-strong hover:bg-background-weak transition-colors no-underline"
+        >
+          X
+        </a>
+      </div>
 
-          <div className="flex items-center gap-6">
-            {footerLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span>&copy;2026 GoDucky</span>
-            {legalLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+      <div className="flex items-center justify-between py-5 px-5 text-xs text-text-weak border-t border-border-weak">
+        <span>©2026 GoDucky</span>
+        <div className="flex gap-4">
+          <Link
+            href="/privacy"
+            className="text-text-weak hover:text-text-strong no-underline transition-colors"
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/terms"
+            className="text-text-weak hover:text-text-strong no-underline transition-colors"
+          >
+            Terms
+          </Link>
+          <a
+            href="#"
+            className="text-text-weak hover:text-text-strong no-underline transition-colors"
+          >
+            Brand
+          </a>
         </div>
       </div>
     </footer>

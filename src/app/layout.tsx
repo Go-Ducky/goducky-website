@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-const inter = Inter({
-  variable: "--font-inter",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const inter = Inter({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "GoDucky | The open source AI coding agent",
   description:
-    "Free models included or connect any model from any provider, including Claude, GPT, Gemini and more.",
+    "Free models included or connect any model from any provider, including Claude, GPT, Gemini and more. Available as a GUI, WebUI, and CLI.",
   icons: {
     icon: "/logo.jpeg",
   },
@@ -26,14 +26,7 @@ export const metadata: Metadata = {
       "Free models included or connect any model from any provider, including Claude, GPT, Gemini and more.",
     url: "https://goducky.dev",
     siteName: "GoDucky",
-    images: [
-      {
-        url: "/logo.jpeg",
-        width: 800,
-        height: 600,
-        alt: "GoDucky",
-      },
-    ],
+    images: [{ url: "/logo.jpeg", width: 800, height: 600, alt: "GoDucky" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -51,10 +44,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
-      >
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className={`${jetbrainsMono.variable} ${inter.variable} antialiased`}>
+        <ThemeProvider>
+          <div className="container">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

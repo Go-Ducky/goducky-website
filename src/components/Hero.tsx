@@ -1,110 +1,86 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Copy, Check } from "lucide-react";
 
-export function Hero() {
+const tabs = [
+  { id: "curl", label: "curl" },
+  { id: "npm", label: "npm" },
+  { id: "bun", label: "bun" },
+  { id: "brew", label: "brew" },
+  { id: "paru", label: "paru" },
+];
+
+const commands: Record<string, string> = {
+  curl: "curl -fsSL https://goducky.dev/install | bash",
+  npm: "npm install -g goducky-ai",
+  bun: "bun install -g goducky-ai",
+  brew: "brew install go-ducky/tap/goducky",
+  paru: "paru -S goducky-bin",
+};
+
+export default function Hero() {
+  const [activeTab, setActiveTab] = useState("curl");
   const [copied, setCopied] = useState(false);
-  const [typedText, setTypedText] = useState("");
-  const fullText = "curl -fsSL https://goducky.dev/install | bash";
 
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i <= fullText.length) {
-        setTypedText(fullText.slice(0, i));
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
-
-  const copyCommand = () => {
-    navigator.clipboard.writeText(fullText);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(commands[activeTab]);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
   };
 
+  useEffect(() => {
+    if (!copied) return;
+    const timer = setTimeout(() => setCopied(false), 2000);
+    return () => clearTimeout(timer);
+  }, [copied]);
+
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden hero-gradient">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-secondary/50 text-sm text-muted-foreground mb-8">
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse-soft" />
-          New — Now available on macOS, Windows, and Linux
+    <section className="flex flex-col items-center pt-24 pb-16 px-4">
+      <div className="inline-flex items-center gap-2 rounded bg-background-strong text-text-inverted text-xs px-2 py-1 mb-8">
+        <span>[New]</span>
+        <span>Introducing the GoDucky desktop app. Available on macOS, Windows, and Linux.</span>
+        <a href="#" className="underline hover:opacity-80">
+          Download now
+        </a>
+      </div>
+
+      <h1 className="font-sans text-3xl sm:text-[38px] font-bold leading-tight text-text-strong mb-2">
+        The open source AI coding agent
+      </h1>
+
+      <p className="text-text mb-8 max-w-[82%] text-center">
+        Free models included or connect any model from any provider, including Claude, GPT, Gemini
+        and more.
+      </p>
+
+      <div className="w-full max-w-xl">
+        <div className="flex items-center bg-background-weak border border-border-weak rounded-t-md px-5 gap-10">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => {
+                setActiveTab(tab.id);
+                setCopied(false);
+              }}
+              className={`py-3 text-sm cursor-pointer ${
+                activeTab === tab.id
+                  ? "border-b-2 border-background-strong text-text-strong font-medium"
+                  : "text-text-weak hover:text-text"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
-          The open source
-          <br />
-          <span className="gradient-text">AI coding agent</span>
-        </h1>
-
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-          Free models included or connect any model from any provider,
-          <br className="hidden sm:block" />
-          including Claude, GPT, Gemini and more.
-        </p>
-
-        <div className="max-w-xl mx-auto mb-12">
-          <div
-            className="terminal-window cursor-pointer"
-            onClick={copyCommand}
+        <div className="bg-background-weak border border-t-0 border-border-weak rounded-b-md p-4 flex items-center justify-between">
+          <code className="font-mono text-sm text-text">{commands[activeTab]}</code>
+          <button
+            onClick={handleCopy}
+            className="ml-4 p-1 rounded hover:bg-background-strong cursor-pointer text-text-weak hover:text-text"
           >
-            <div className="terminal-header">
-              <div className="terminal-dot red" />
-              <div className="terminal-dot yellow" />
-              <div className="terminal-dot green" />
-              <span className="ml-2 text-xs text-gray-400">Terminal</span>
-              <span className="ml-auto text-xs text-gray-500">
-                {copied ? "Copied!" : "Click to copy"}
-              </span>
-            </div>
-            <div className="terminal-content">
-              <span className="terminal-prompt">$ </span>
-              <span className="terminal-command">{typedText}</span>
-              <span className="terminal-cursor" />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground">
-          <span className="px-3 py-1 rounded-md border border-border bg-secondary/30 font-mono text-xs">npm</span>
-          <span className="px-3 py-1 rounded-md border border-border bg-secondary/30 font-mono text-xs">bun</span>
-          <span className="px-3 py-1 rounded-md border border-border bg-secondary/30 font-mono text-xs">brew</span>
-          <span className="px-3 py-1 rounded-md border border-border bg-secondary/30 font-mono text-xs">paru</span>
-        </div>
-
-        <div className="mt-16 relative max-w-4xl mx-auto">
-          <div className="terminal-window animate-float">
-            <div className="terminal-header">
-              <div className="terminal-dot red" />
-              <div className="terminal-dot yellow" />
-              <div className="terminal-dot green" />
-              <span className="ml-2 text-xs text-gray-400">GoDucky Terminal</span>
-            </div>
-            <div className="terminal-content text-left">
-              <div className="mb-2">
-                <span className="terminal-prompt">{"\u276F "} </span>
-                <span className="text-purple-400">goducky</span>
-                <span className="text-gray-400"> {"\u2014"}help</span>
-              </div>
-              <div className="mb-4 text-gray-400">
-                <div className="ml-4">Starting GoDucky v1.0.0...</div>
-                <div className="ml-4">Loading AI models...</div>
-                <div className="ml-4 text-green-400">{"\u2713"} Ready</div>
-              </div>
-              <div className="mb-2">
-                <span className="terminal-prompt">{"\u276F "} </span>
-                <span className="text-gray-400">Help me refactor this component to use hooks</span>
-              </div>
-              <div className="ml-4 text-blue-300">
-                <div>{"\u25CF"} Analyzing codebase...</div>
-                <div>{"\u25CF"} Found 3 files to modify</div>
-                <div className="text-green-300">{"\u25CF"} Changes applied successfully</div>
-              </div>
-            </div>
-          </div>
+            {copied ? <Check size={16} /> : <Copy size={16} />}
+          </button>
         </div>
       </div>
     </section>

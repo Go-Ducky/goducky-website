@@ -1,87 +1,68 @@
-import {
-  Code2,
-  Share2,
-  GitBranch,
-  Plug,
-  Layers,
-  Monitor,
-  MessageSquare,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const features = [
   {
-    icon: Code2,
-    title: "LSP enabled",
+    name: "LSP enabled",
     description: "Automatically loads the right LSPs for the LLM",
   },
   {
-    icon: Layers,
-    title: "Multi-session",
+    name: "Multi-session",
     description: "Start multiple agents in parallel on the same project",
   },
   {
-    icon: Share2,
-    title: "Share links",
+    name: "Share links",
     description: "Share a link to any session for reference or to debug",
   },
   {
-    icon: GitBranch,
-    title: "GitHub Copilot",
+    name: "GitHub Copilot",
     description: "Log in with GitHub to use your Copilot account",
   },
   {
-    icon: MessageSquare,
-    title: "Any model",
+    name: "Any model",
     description: "75+ LLM providers through Models.dev, including local models",
   },
   {
-    icon: Plug,
-    title: "MCP support",
+    name: "MCP support",
     description: "Connect to any MCP server for extended capabilities",
   },
   {
-    icon: Monitor,
-    title: "Any editor",
-    description: "Available as a terminal interface, desktop app, and IDE extension",
+    name: "Any interface",
+    description: "Available as a GUI, WebUI, and CLI",
   },
 ];
 
-export function Features() {
+export default function Features() {
   return (
-    <section id="docs" className="py-20 border-t border-border">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            What is GoDucky?
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            GoDucky is an open source agent that helps you write code in your terminal, IDE, or desktop.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section className="section">
+      <div className="max-w-3xl mx-auto px-5">
+        <h3 className="text-base font-bold text-text-strong mb-3 font-sans">
+          What is GoDucky?
+        </h3>
+        <p className="text-text mb-8">
+          GoDucky is an open source agent that helps you write code in your GUI,
+          WebUI, and CLI.
+        </p>
+        <div>
           {features.map((feature) => (
             <div
-              key={feature.title}
-              className="group p-6 rounded-xl border border-border bg-card hover:bg-secondary/50 transition-all duration-300 card-glow"
+              key={feature.name}
+              className="flex items-start gap-3 mb-1"
+              style={{ lineHeight: "1.75" }}
             >
-              <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <feature.icon className="w-5 h-5 text-muted-foreground" />
-              </div>
-              <h3 className="font-semibold mb-2">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground">{feature.description}</p>
+              <span className="text-icon flex-shrink-0">[*]</span>
+              <p>
+                <strong className="font-medium text-text-strong mr-3">
+                  {feature.name}
+                </strong>
+                <span className="text-text">{feature.description}</span>
+              </p>
             </div>
           ))}
         </div>
-
-        <div className="text-center mt-12">
-          <a
-            href="#download"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
-          >
-            Read docs
-          </a>
-        </div>
+        <a href="/docs" className="btn-primary mt-8 inline-flex items-center gap-2">
+          Read docs
+          <ArrowRight className="w-4 h-4" />
+        </a>
       </div>
     </section>
   );
