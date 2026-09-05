@@ -14,12 +14,9 @@ const features = [
     description: "Share a link to any session for reference or to debug",
   },
   {
-    name: "GitHub Copilot",
-    description: "Log in with GitHub to use your Copilot account",
-  },
-  {
     name: "Any model",
-    description: "75+ LLM providers through Models.dev, including local models",
+    description:
+      "Local (Ollama), OpenRouter, Gemini, OpenAI (ChatGPT), Claude, and Groq",
   },
   {
     name: "MCP support",
@@ -27,7 +24,7 @@ const features = [
   },
   {
     name: "Any interface",
-    description: "Available as a GUI, WebUI, and CLI",
+    description: "Available as a CLI and soon a GUI and WebUI",
   },
 ];
 
@@ -39,8 +36,8 @@ export default function Features() {
           What is GoDucky?
         </h3>
         <p className="text-text mb-8">
-          GoDucky is an open source agent that helps you write code in your GUI,
-          WebUI, and CLI.
+          GoDucky is an open source agent that helps you write code in your
+          terminal today, with a GUI and WebUI coming soon.
         </p>
         <div>
           {features.map((feature) => (
@@ -49,7 +46,6 @@ export default function Features() {
               className="flex items-start gap-3 mb-1"
               style={{ lineHeight: "1.75" }}
             >
-              <span className="text-icon flex-shrink-0">[*]</span>
               <p>
                 <strong className="font-medium text-text-strong mr-3">
                   {feature.name}

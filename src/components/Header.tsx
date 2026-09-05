@@ -30,12 +30,12 @@ export default function Header() {
         >
           GitHub
         </a>
-        <a
-          href="#docs"
+        <Link
+          href="/docs"
           className="text-sm text-text-weak hover:text-text-strong no-underline"
         >
           Docs
-        </a>
+        </Link>
         <Link
           href="/about"
           className="text-sm text-text-weak hover:text-text-strong no-underline"
@@ -74,13 +74,13 @@ export default function Header() {
           >
             GitHub
           </a>
-          <a
-            href="#docs"
+          <Link
+            href="/docs"
             className="text-sm text-text-weak hover:text-text-strong no-underline"
             onClick={() => setMenuOpen(false)}
           >
             Docs
-          </a>
+          </Link>
           <Link
             href="/about"
             className="text-sm text-text-weak hover:text-text-strong no-underline"

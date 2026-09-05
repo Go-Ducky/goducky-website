@@ -8,26 +8,26 @@ The official website for GoDucky - the open source AI coding agent. Built with N
 
 - Modern, responsive design matching opencode.ai aesthetic
 - Light / Dark / System theme toggle
-- Terminal-style install command tabs (curl, npm, bun, brew, paru)
-- Real waitlist email signup form with API route
+- Terminal-style install command tabs (macOS/Linux, Windows)
 - Live GitHub stats auto-updated in real-time (refresh every 60s)
+- About page with real org members and contributors from GitHub
 - Full Privacy Policy and Terms of Service pages
-- Documentation landing page
-- Download page with platform-specific install commands
+- Interactive documentation with search and categories
+- Download page with install, update, and uninstall commands
 - Mobile-friendly navigation
 
 ## Pages
 
 | Route | Description |
 |-------|-------------|
-| `/` | Home page with hero, features, stats, FAQ, waitlist |
-| `/about` | About page with founder (lordpipon) info and socials |
-| `/docs` | Documentation landing page |
-| `/download` | Platform-specific installation commands |
+| `/` | Home page with hero, features, stats, FAQ |
+| `/about` | About page with live org members and contributors |
+| `/docs` | Interactive documentation (search + categories) |
+| `/download` | Install, update, and uninstall commands |
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Service |
-| `/api/waitlist` | POST endpoint for email waitlist signup |
 | `/api/github-stats` | GET endpoint returning live GitHub org stats |
+| `/api/github-org` | GET endpoint returning org members and contributors |
 
 ## Tech Stack
 
@@ -92,18 +92,6 @@ vercel
 
 Vercel will automatically detect Next.js and configure build settings.
 
-### Waitlist Storage (Vercel KV / Upstash)
-
-The waitlist endpoint stores emails in [Vercel KV](https://vercel.com/docs/storage/vercel-kv) (Upstash Redis) when the connection env vars are present, and falls back to a local `waitlist-data.json` file for local development (this file is gitignored).
-
-**To make the waitlist persist in production:**
-
-1. In your [Vercel dashboard](https://vercel.com), open the project → **Storage** → **Create Database** → **KV** (Upstash).
-2. Enable **“Connect to project”** so Vercel auto-adds the `KV_REST_API_URL` and `KV_REST_API_TOKEN` env vars.
-3. Redeploy (or run `vercel env pull` locally).
-
-After that, every waitlist signup is stored in the KV store under the `goducky:waitlist` set. You can view/expose them via the Upstash console or the Vercel storage dashboard.
-
 ## Project Structure
 
 ```
@@ -115,25 +103,28 @@ goducky-website/
 │   │   ├── globals.css          # Design tokens (light/dark)
 │   │   ├── layout.tsx           # Root layout
 │   │   ├── page.tsx             # Home page
-│   │   ├── about/page.tsx       # About + founder
+│   │   ├── about/page.tsx       # About (live org members/contributors)
 │   │   ├── privacy/page.tsx     # Privacy Policy
 │   │   ├── terms/page.tsx       # Terms of Service
 │   │   ├── docs/page.tsx        # Documentation
 │   │   ├── download/page.tsx    # Download page
-│   │   ├── api/waitlist/
-│   │   │   └── route.ts         # Waitlist API endpoint (KV/Upstash)
-│   │   └── api/github-stats/
-│   │       └── route.ts         # Live GitHub org stats endpoint
+│   │   ├── api/github-stats/
+│   │   │   └── route.ts         # Live GitHub org stats endpoint
+│   │   └── api/github-org/
+│   │       └── route.ts         # Org members + contributors endpoint
 │   └── components/
 │       ├── Header.tsx           # Sticky nav with theme toggle
 │       ├── ThemeToggle.tsx      # Light/Dark/System switch
 │       ├── ThemeProvider.tsx    # next-themes wrapper
-│       ├── Hero.tsx             # Install tabs + banner
+│       ├── Hero.tsx             # Hero section
 │       ├── Features.tsx         # Feature list
-│       ├── Stats.tsx            # GitHub stats
+│       ├── Stats.tsx            # Live GitHub stats
 │       ├── Privacy.tsx          # Privacy blurb
 │       ├── FAQ.tsx              # Accordion FAQ
-│       ├── Waitlist.tsx         # Email signup form
+│       ├── DocsView.tsx         # Interactive docs
+│       ├── InstallCommands.tsx  # Install command tabs
+│       ├── UpdateCommands.tsx   # Update commands
+│       ├── UninstallCommands.tsx # Uninstall command tabs
 │       └── Footer.tsx           # Footer + legal bar
 ├── package.json
 ├── tailwind.config.js

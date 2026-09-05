@@ -155,9 +155,9 @@ const DOCS: DocItem[] = [
       {
         heading: "Cloud providers (API key)",
         paragraphs: [
-          "Login once, then run with that provider. OpenRouter defaults to openrouter/free, which routes to any currently-free model.",
+          "Login once, then run with that provider. Supported providers: OpenRouter, Gemini, OpenAI (ChatGPT), Claude, and Groq. OpenRouter defaults to openrouter/free, which routes to any currently-free model.",
         ],
-        code: "goducky --login groq\ngoducky --provider groq\n\ngoducky --login openrouter\ngoducky --provider openrouter",
+        code: "goducky --login groq\ngoducky --provider groq\n\ngoducky --login openrouter\ngoducky --provider openrouter\ngoducky --login gemini\n goducky --login openai\n goducky --login anthropic",
       },
       {
         heading: "OpenAI-compatible endpoints",
@@ -311,7 +311,7 @@ const DOCS: DocItem[] = [
       {
         heading: "Stay updated",
         paragraphs: [
-          "Join the waitlist on the homepage to get early access invites and release announcements by email.",
+          "Follow the Go-Ducky GitHub organization to get release announcements and updates by email.",
         ],
       },
     ],
@@ -331,7 +331,7 @@ const DOCS: DocItem[] = [
       {
         heading: "Get notified",
         paragraphs: [
-          "Join the waitlist on the homepage to be the first to know when the desktop app launches.",
+          "Follow the Go-Ducky GitHub organization to be the first to know when the desktop app launches.",
         ],
       },
     ],

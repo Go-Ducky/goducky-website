@@ -17,17 +17,17 @@ const faqItems = [
   {
     question: "Do I need extra AI subscriptions to use GoDucky?",
     answer:
-      "Not necessarily. GoDucky comes with a set of free models that you can use without creating an account. You can also use any of the popular coding models by creating an account. GoDucky works with all popular providers such as OpenAI, Anthropic, xAI and more. You can even connect your local models.",
+      "Not necessarily. GoDucky works with local models via Ollama for free. For cloud models you can connect OpenRouter, Gemini, OpenAI (ChatGPT), Claude, and Groq — many of which have free tiers. Bring your own API key and you're set.",
   },
   {
     question: "Can I use my existing AI subscriptions with GoDucky?",
     answer:
-      "Yes! GoDucky supports subscription plans from all major providers. You can use your Claude Pro/Max, ChatGPT Plus/Pro, or GitHub Copilot subscriptions.",
+      "Yes! GoDucky works with the providers you already pay for. Use your OpenAI (ChatGPT), Claude, Gemini, or Groq keys directly.",
   },
   {
     question: "Can I only use GoDucky in the terminal?",
     answer:
-      "Not anymore! GoDucky is available as a desktop GUI app, a WebUI, and a CLI.",
+      "GoDucky is primarily a CLI today, with a GUI desktop app and WebUI coming soon.",
   },
   {
     question: "How much does GoDucky cost?",

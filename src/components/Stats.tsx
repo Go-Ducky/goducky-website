@@ -10,11 +10,25 @@ interface Repo {
   forks: number;
   language: string | null;
   url: string;
+  contributors: string[];
 }
 
 interface Stats {
-  org: { login: string; name: string; publicRepos: number; followers: number };
-  metrics: { stars: number; forks: number; commits: number; repos: number };
+  org: {
+    login: string;
+    name: string;
+    publicRepos: number;
+    followers: number;
+    description: string;
+    htmlUrl: string;
+  };
+  metrics: {
+    stars: number;
+    forks: number;
+    commits: number;
+    repos: number;
+    contributors: number;
+  };
   repos: Repo[];
   updatedAt: string;
 }
@@ -86,15 +100,28 @@ export default function Stats() {
         ) : (
           <>
             <p className="text-text mb-4">
-              The GoDucky organization has{" "}
+              The GoDucky organization on{" "}
+              <a
+                href="https://github.com/Go-Ducky"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-strong hover:underline no-underline"
+              >
+                GitHub
+              </a>{" "}
+              has{" "}
               <strong className="font-medium text-text-strong">
-                {stats ? formatNumber(stats.metrics.repos) : "2"}
+                {stats ? formatNumber(stats.metrics.repos) : "3"}
               </strong>{" "}
-              public repositories, with a total of{" "}
+              public repositories with a total of{" "}
               <strong className="font-medium text-text-strong">
-                {stats ? formatNumber(stats.metrics.stars) : "1"}
+                {stats ? formatNumber(stats.metrics.stars) : "2"}
               </strong>{" "}
-              GitHub stars across all projects.
+              stars, contributed to by{" "}
+              <strong className="font-medium text-text-strong">
+                {stats ? formatNumber(stats.metrics.contributors) : "2"}
+              </strong>{" "}
+              contributors.
             </p>
 
             <div className="grid grid-cols-3 gap-4 mb-6">
@@ -111,9 +138,9 @@ export default function Stats() {
                 </p>
               </div>
               <div className="text-center">
-                <p className="text-xs text-text-weak">Forks</p>
+                <p className="text-xs text-text-weak">Contributors</p>
                 <p className="text-2xl font-bold text-text-strong mb-1 font-sans">
-                  {stats ? formatNumber(stats.metrics.forks) : "—"}
+                  {stats ? formatNumber(stats.metrics.contributors) : "—"}
                 </p>
               </div>
             </div>
