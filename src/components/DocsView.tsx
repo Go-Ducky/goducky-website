@@ -25,23 +25,24 @@ const DOCS: DocItem[] = [
     desc: "Install GoDucky on macOS, Windows, or Linux",
     content: [
       {
-        heading: "Requirements",
+        heading: "About GoDucky",
         paragraphs: [
-          "GoDucky runs on macOS, Windows, and Linux. You need at least 4GB of RAM and 500MB of free disk space. The desktop app bundles everything you need — no separate runtime required.",
+          "GoDucky is a terminal-based AI coding agent written in Go. It reads, writes, and edits files, runs shell commands, and searches your codebase. One static binary that runs on Windows, macOS, and Linux.",
         ],
       },
       {
-        heading: "Download the app",
+        heading: "macOS & Linux",
         paragraphs: [
-          "Download the installer for your platform from the Download page. The desktop app includes the full GoDucky experience: chat, agent, terminal, and all integrations.",
+          "One curl installer for both — it auto-detects your OS and CPU and adds goducky to your shell PATH (bash, zsh, fish, or ~/.profile). Open a new terminal and goducky just works.",
         ],
+        code: "curl -fsSL https://raw.githubusercontent.com/Go-Ducky/cli/main/scripts/install.sh | bash",
       },
       {
-        heading: "Install via the CLI (coming soon)",
+        heading: "Windows",
         paragraphs: [
-          "A GoDucky CLI is in the works and will be published to the goducky-cli repository. Once it ships you'll be able to install it with a curl script or your package manager.",
+          "The installer downloads the right binary and adds it to your user PATH automatically (works in the current terminal too).",
         ],
-        code: "curl -fsSL https://github.com/go-ducky/goducky-cli/releases/latest/download/install.sh | bash",
+        code: 'irm https://raw.githubusercontent.com/Go-Ducky/cli/main/scripts/install.ps1 -OutFile "$env:TEMP\\goducky-install.ps1"\npowershell -ExecutionPolicy Bypass -File "$env:TEMP\\goducky-install.ps1"',
       },
     ],
   },
@@ -52,22 +53,25 @@ const DOCS: DocItem[] = [
     desc: "Get up and running in under 2 minutes",
     content: [
       {
-        heading: "Launch GoDucky",
+        heading: "Launch goDucky",
         paragraphs: [
-          "Open the GoDucky app and sign in with your GoDucky account. On first launch you'll be asked to pick a model provider — free models are included out of the box.",
+          "Run goducky in any directory. The first run walks you through setup with simple menus (arrow keys / WASD): it can install Ollama and pull a local model for you. A list of recommended models is grouped by family (Qwen, Starcoder, Deepseek, Codegemma, Llama) — pick one and it's pulled automatically — or plug in a cloud API key. Groq is a good free starting point.",
         ],
+        code: "goducky",
       },
       {
-        heading: "Pick a model",
+        heading: "One-shot prompt",
         paragraphs: [
-          "Choose a bundled free model to start instantly, or connect your own provider key (Claude, GPT, Gemini, and more). You can switch providers at any time from Settings.",
+          "Run a single prompt and exit without entering the interactive editor.",
         ],
+        code: 'goducky -p "explain this repo"',
       },
       {
-        heading: "Start your first task",
+        heading: "List models",
         paragraphs: [
-          "Open a folder in the agent panel and paste a prompt. GoDucky will read the codebase, plan the change, and apply edits you can review before accepting.",
+          "See every model available to a provider.",
         ],
+        code: "goducky --models",
       },
     ],
   },
@@ -78,17 +82,237 @@ const DOCS: DocItem[] = [
     desc: "Configure GoDucky for your workflow",
     content: [
       {
-        heading: "Settings",
+        heading: "Config file",
         paragraphs: [
-          "Open Settings to configure your provider keys, default model, theme, and keyboard shortcuts. All settings sync across devices when you're signed in.",
+          "Settings live in ~/.config/goducky/config.json (or ~/Library/Application Support/goducky/config.json on macOS). Providers, models, and agent options are stored as plain JSON.",
         ],
       },
       {
-        heading: "goducky.json",
+        heading: "Edit from the TUI",
         paragraphs: [
-          "Project-level configuration lives in a goducky.json file at your project root. You can pin the model, define rules, and toggle features per repository.",
+          "Inside the TUI, /config shows your active provider and model. Use /config <key> <value> to edit — keys are dotted JSON paths (provider, ollama.host, agent.auto_approve) with friendly aliases: host, auto-approve (on/off), iterations, output, exclude. Provider and model changes apply immediately.",
         ],
-        code: '{\n  "model": "claude-sonnet-4-5",\n  "rules": [".cursorrules"],\n  "disableTelemetry": true\n}',
+        code: '/config agent.auto_approve true',
+      },
+    ],
+  },
+  {
+    id: "flags",
+    category: "CLI Reference",
+    title: "Command-line Flags",
+    desc: "All goducky flags and subcommands",
+    content: [
+      {
+        heading: "Flags",
+        paragraphs: [
+          "goducky supports the following flags:",
+        ],
+        code: "goducky\n  -p string          Run a one-shot prompt and exit\n  -provider string   ollama | groq | openai | openai_compatible | anthropic | gemini | openrouter\n  -model string      Model name (overrides config)\n  -base-url string   Base URL for OpenAI-compatible endpoints\n  -key string        API key (overrides config/env)\n  -login string      Save an API key (groq|openai|openai_compatible|anthropic|gemini|openrouter)\n  -models            List available models and exit\n  -yes               Auto-approve all tool actions\n  -dir string        Working directory (default: current)\n  -version           Print version and exit",
+      },
+      {
+        heading: "Subcommands",
+        paragraphs: [
+          "goducky also ships these subcommands:",
+        ],
+        code: "goducky completion <shell>   Print tab-completion (bash, zsh, fish, powershell)\ngoducky update [tag]        Self-update (or a specific tag)\ngoducky mcp [--dir <path>]  Run an MCP stdio server\ngoducky sessions            List saved chats\ngoducky resume <n-or-name>  Resume a saved chat\ngoducky rename <old> <new>  Rename a saved chat",
+      },
+    ],
+  },
+  {
+    id: "tui-commands",
+    category: "CLI Reference",
+    title: "TUI Commands",
+    desc: "Slash commands inside the terminal UI",
+    content: [
+      {
+        heading: "In the TUI",
+        paragraphs: [
+          "While inside the interactive editor, these slash commands are available:",
+        ],
+        code: "/help           Show help\n/models         Pick a model for the current provider\n/config         Show configuration, then /config <key> <value> to edit\n/provider       Choose a provider interactively (or: /provider <name>)\n/model <name>   Set the model for the current provider (auto-pulls for Ollama)\n/pull <name>    Pull a model through Ollama (e.g. /pull qwen2.5-coder:7b)\n/rm <name>      Remove a local Ollama model\n/save <name>    Save this chat so you can resume it later\n/rename <name>  Rename the current chat\n/sessions       List saved chats (resume with goducky resume <n>)\n/github         Open the GoDucky repo in your browser\n/login          How to add a cloud API key\n/clear          Clear the conversation\n/exit           Quit",
+      },
+      {
+        heading: "Navigation",
+        paragraphs: [
+          "Arrow up/down recalls previous prompts. Menus are navigated with arrow keys or WASD — Enter picks, Esc cancels. Ctrl+C or Ctrl+X quits. PageUp/PageDown scroll, and text is selectable with the mouse for normal copy/paste.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "providers",
+    category: "CLI Reference",
+    title: "Providers & Models",
+    desc: "Local Ollama or any cloud provider",
+    content: [
+      {
+        heading: "Local models (Ollama)",
+        paragraphs: [
+          "GoDucky works with local models via Ollama.",
+        ],
+        code: "ollama pull qwen2.5-coder:7b\ngoducky --provider ollama --model qwen2.5-coder:7b",
+      },
+      {
+        heading: "Cloud providers (API key)",
+        paragraphs: [
+          "Login once, then run with that provider. OpenRouter defaults to openrouter/free, which routes to any currently-free model.",
+        ],
+        code: "goducky --login groq\ngoducky --provider groq\n\ngoducky --login openrouter\ngoducky --provider openrouter",
+      },
+      {
+        heading: "OpenAI-compatible endpoints",
+        paragraphs: [
+          "Any endpoint that speaks the OpenAI-compatible API works.",
+        ],
+        code: 'goducky --provider openai_compatible \\\n  --base-url http://localhost:1234/v1 \\\n  --model local-model',
+      },
+    ],
+  },
+  {
+    id: "sessions",
+    category: "CLI Reference",
+    title: "Chat Sessions",
+    desc: "Save, list, resume, and rename chats",
+    content: [
+      {
+        heading: "Sessions are saved",
+        paragraphs: [
+          "Chats are saved automatically when you quit the TUI, so you can pick up where you left off. Untitled chats get a name like chat-2026-09-05-19-44.",
+        ],
+        code: "goducky sessions\ngoducky resume\ngoducky resume 2\ngoducky resume \"fix bug\"",
+      },
+      {
+        heading: "Resume behavior",
+        paragraphs: [
+          "resume looks for an exact name first, then a name fragment, then a number. Sessions remember their provider, model, history, and working directory, so a resumed chat continues on the same model in the same project.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mcp",
+    category: "CLI Reference",
+    title: "MCP Server",
+    desc: "Expose GoDucky tools to MCP clients",
+    content: [
+      {
+        heading: "Run GoDucky as an MCP server",
+        paragraphs: [
+          "GoDucky can act as an MCP (Model Context Protocol) server over stdio, exposing its file/edit/bash/search tools to clients like Claude Desktop or AI IDEs.",
+        ],
+        code: "goducky mcp\ngoducky mcp --dir /path/to/project",
+      },
+      {
+        heading: "Example: Claude Desktop",
+        paragraphs: [
+          "Add it to claude_desktop_config.json. The server auto-approves tool calls and only writes to stderr, keeping the stdio channel clean.",
+        ],
+        code: '{\n  "mcpServers": {\n    "goducky": { "command": "goducky", "args": ["mcp", "--dir", "/path/to/project"] }\n  }\n}',
+      },
+    ],
+  },
+  {
+    id: "updating",
+    category: "CLI Reference",
+    title: "Updating",
+    desc: "Update GoDucky to the newest release",
+    content: [
+      {
+        heading: "Update",
+        paragraphs: [
+          "The updater downloads the matching binary for your OS/CPU from GitHub Releases, verifies its SHA-256 checksum, and replaces the current executable. On Windows the running binary is renamed aside first so you can update from within the app.",
+        ],
+        code: "goducky update\ngoducky update v1.0.0",
+      },
+    ],
+  },
+  {
+    id: "completion",
+    category: "CLI Reference",
+    title: "Shell Completion",
+    desc: "Tab completion for your shell",
+    content: [
+      {
+        heading: "Generate a completion script",
+        paragraphs: [
+          "Completes all flags (--provider, --model, --login, ...) and offers provider values.",
+        ],
+        code: "goducky completion bash\ngoducky completion zsh\ngoducky completion fish\ngoducky completion powershell",
+      },
+      {
+        heading: "Enable per shell",
+        paragraphs: [
+          "bash: source <(goducky completion bash) in ~/.bashrc. zsh: source <(goducky completion zsh) in ~/.zshrc. fish: goducky completion fish | source. PowerShell: goducky completion powershell | Out-String | Invoke-Expression in your $PROFILE.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "uninstalling",
+    category: "CLI Reference",
+    title: "Uninstalling",
+    desc: "Remove GoDucky from your system",
+    content: [
+      {
+        heading: "macOS & Linux",
+        paragraphs: [
+          "Run the matching uninstall script — it removes the binary and the PATH entries the installer added, and asks whether to also delete your saved chats and config.",
+        ],
+        code: "curl -fsSL https://raw.githubusercontent.com/Go-Ducky/cli/main/scripts/uninstall.sh | bash",
+      },
+      {
+        heading: "Windows",
+        paragraphs: [
+          "",
+        ],
+        code: 'irm https://raw.githubusercontent.com/Go-Ducky/cli/main/scripts/uninstall.ps1 -OutFile "$env:TEMP\\goducky-uninstall.ps1"\npowershell -ExecutionPolicy Bypass -File "$env:TEMP\\goducky-uninstall.ps1"',
+      },
+      {
+        heading: "Manual removal",
+        paragraphs: [
+          "Or do it by hand: delete ~/.goducky/bin/goducky (or $HOME\\.goducky\\bin\\goducky.exe) and the PATH lines it added.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "cli-interface",
+    category: "Interfaces",
+    title: "Command Line (CLI)",
+    desc: "The GoDucky terminal agent — available now",
+    content: [
+      {
+        heading: "Available now",
+        paragraphs: [
+          "The CLI is the full GoDucky terminal agent, released from the Go-Ducky/cli repository. Install it, then run goducky in any directory to start coding with AI assistance.",
+        ],
+      },
+      {
+        heading: "Get it",
+        paragraphs: [
+          "Head to the Download page for the one-line installers for macOS, Linux, and Windows.",
+        ],
+        code: "curl -fsSL https://raw.githubusercontent.com/Go-Ducky/cli/main/scripts/install.sh | bash",
+      },
+    ],
+  },
+  {
+    id: "website",
+    category: "Interfaces",
+    title: "Website",
+    desc: "GoDucky.org and this documentation",
+    content: [
+      {
+        heading: "The website",
+        paragraphs: [
+          "The GoDucky website (goducky.org) is where you'll find downloads, docs, and the changelog. This documentation lives alongside the site, and both are maintained in the Go-Ducky/goducky-website repository.",
+        ],
+      },
+      {
+        heading: "Stay updated",
+        paragraphs: [
+          "Join the waitlist on the homepage to get early access invites and release announcements by email.",
+        ],
       },
     ],
   },
@@ -96,173 +320,18 @@ const DOCS: DocItem[] = [
     id: "gui",
     category: "Interfaces",
     title: "GUI Desktop App",
-    desc: "Use GoDucky as a native desktop application",
-    content: [
-      {
-        heading: "The desktop app",
-        paragraphs: [
-          "The GUI desktop app is the primary way to use GoDucky. It provides a chat window, an agent panel for multi-file edits, a built-in terminal, and inline code diffs.",
-        ],
-      },
-      {
-        heading: "Keyboard shortcuts",
-        paragraphs: [
-          "Use Cmd/Ctrl+K to open the command palette, Cmd/Ctrl+Enter to run an agent task, and Cmd/Ctrl+I to toggle inline edits in supported editors.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "webui",
-    category: "Interfaces",
-    title: "Web UI",
-    desc: "Access GoDucky through your browser",
-    content: [
-      {
-        heading: "Browser access",
-        paragraphs: [
-          "The Web UI gives you the same chat and agent experience in the browser. It's great for quick questions, pairing sessions, and working from machines without a desktop install.",
-        ],
-      },
-      {
-        heading: "Sessions sync",
-        paragraphs: [
-          "Conversations and agent sessions sync with your account, so you can start on desktop and continue in the browser seamlessly.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "cli",
-    category: "Interfaces",
-    title: "Command Line (CLI)",
-    desc: "Use GoDucky directly in your terminal",
+    desc: "A graphic interface for GoDucky — coming soon",
     content: [
       {
         heading: "Coming soon",
         paragraphs: [
-          "The GoDucky CLI is being prepared for release and will be published to the goducky-cli repository. It will let you run agents directly from your terminal and script them in CI.",
+          "A GUI desktop app for GoDucky is in development. It will bring the same agent power to a visual interface on macOS, Windows, and Linux — with a chat window, agent panel, inline diffs, and built-in terminal.",
         ],
       },
       {
-        heading: "Join the waitlist",
+        heading: "Get notified",
         paragraphs: [
-          "Sign up on the homepage to get early access as soon as the CLI ships. We'll email you when the first release is available for download.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "providers",
-    category: "Providers",
-    title: "Supported Models",
-    desc: "View all supported LLM providers and models",
-    content: [
-      {
-        heading: "Providers",
-        paragraphs: [
-          "GoDucky supports Anthropic (Claude), OpenAI (GPT), Google (Gemini), and open-weight models. Free tiers are included with your account for quick starts.",
-        ],
-      },
-      {
-        heading: "Bring your own key",
-        paragraphs: [
-          "Add a provider API key in Settings to use your own quota. Your keys are stored encrypted and never shared.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "github-copilot",
-    category: "Providers",
-    title: "GitHub Copilot",
-    desc: "Use your GitHub Copilot subscription",
-    content: [
-      {
-        heading: "Copilot integration",
-        paragraphs: [
-          "If you have a GitHub Copilot subscription, you can point GoDucky at your Copilot credentials under Settings > Providers to reuse your existing quota.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "local-models",
-    category: "Providers",
-    title: "Local Models",
-    desc: "Connect local LLMs via Ollama or LM Studio",
-    content: [
-      {
-        heading: "Ollama",
-        paragraphs: [
-          "Run models locally with Ollama and connect them in Settings > Providers > Local. GoDucky auto-detects models served on localhost.",
-        ],
-      },
-      {
-        heading: "LM Studio",
-        paragraphs: [
-          "LM Studio's local server is supported too. Start its server, then add the endpoint in GoDucky and pick any downloaded model.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "mcp",
-    category: "Advanced",
-    title: "MCP Servers",
-    desc: "Extend GoDucky with Model Context Protocol servers",
-    content: [
-      {
-        heading: "What is MCP?",
-        paragraphs: [
-          "Model Context Protocol servers let GoDucky talk to external tools — browsers, databases, file systems, and more. Add MCP servers in Settings > MCP.",
-        ],
-      },
-      {
-        heading: "Example",
-        paragraphs: [
-          "Connect a filesystem MCP server to let the agent read and write files, or a database MCP to run queries while it plans changes.",
-        ],
-        code: '{"mcpServers": {"fs": {"command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem", "./"]}}}',
-      },
-    ],
-  },
-  {
-    id: "rules",
-    category: "Advanced",
-    title: "Custom Rules",
-    desc: "Define custom behavior and coding rules",
-    content: [
-      {
-        heading: "Rules files",
-        paragraphs: [
-          "Create .cursorrules or AGENTS.md files in your project to steer GoDucky's behavior: code style, testing conventions, and things to avoid.",
-        ],
-      },
-      {
-        heading: "Global rules",
-        paragraphs: [
-          "Set global rules in Settings to apply across every project, so your preferences follow you everywhere.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "themes",
-    category: "Advanced",
-    title: "Themes",
-    desc: "Customize the look and feel of GoDucky",
-    content: [
-      {
-        heading: "Light and dark",
-        paragraphs: [
-          "GoDucky ships with light and dark themes, plus an automatic mode that follows your system. Set it in Settings > Appearance or with the toggle in the header.",
-        ],
-      },
-      {
-        heading: "Custom themes",
-        paragraphs: [
-          "More themes and custom accent colors are on the roadmap. Pull requests for new themes are welcome in the goducky-cli repository.",
+          "Join the waitlist on the homepage to be the first to know when the desktop app launches.",
         ],
       },
     ],
@@ -271,9 +340,8 @@ const DOCS: DocItem[] = [
 
 const CATEGORY_ICONS: Record<string, string> = {
   "Getting Started": "🚀",
+  "CLI Reference": "💻",
   Interfaces: "🖥️",
-  Providers: "🔌",
-  Advanced: "⚙️",
 };
 
 function CodeBlock({ code }: { code: string }) {
