@@ -24,7 +24,7 @@ const features = [
   },
   {
     name: "Any interface",
-    description: "Available as a CLI and soon a GUI and WebUI",
+    description: "Available as a CLI and WebUI; desktop GUI in development",
   },
 ];
 
@@ -37,7 +37,7 @@ export default function Features() {
         </h3>
         <p className="text-text mb-8">
           GoDucky is an open source agent that helps you write code in your
-          terminal today, with a GUI and WebUI coming soon.
+          terminal or browser today, with a desktop GUI in development.
         </p>
         <div>
           {features.map((feature) => (

@@ -7,7 +7,7 @@ const faqItems = [
   {
     question: "What is GoDucky?",
     answer:
-      "GoDucky is an open source agent that helps you write code with any AI model. It's available as a GUI desktop app, WebUI, and CLI.",
+      "GoDucky is an open source agent that helps you write code with any AI model. The CLI and WebUI are available now; the desktop GUI is in development.",
   },
   {
     question: "How do I use GoDucky?",
@@ -27,7 +27,7 @@ const faqItems = [
   {
     question: "Can I only use GoDucky in the terminal?",
     answer:
-      "GoDucky is primarily a CLI today, with a GUI desktop app and WebUI coming soon.",
+      "No. You can use the CLI in your terminal or the live GoDucky WebUI in your browser. A desktop GUI is in development.",
   },
   {
     question: "How much does GoDucky cost?",

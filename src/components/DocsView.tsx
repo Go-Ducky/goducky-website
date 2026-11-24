@@ -317,6 +317,22 @@ const DOCS: DocItem[] = [
     ],
   },
   {
+    id: "webui",
+    category: "Interfaces",
+    title: "WebUI",
+    desc: "GoDucky WebUI — available now",
+    content: [
+      {
+        heading: "Chat in your browser",
+        paragraphs: ["Open GoDucky WebUI to chat with available AI models, use tools, and return to your saved conversations. Anonymous Chat does not save conversations to history."],
+      },
+      {
+        heading: "Your account",
+        paragraphs: ["Sign in at web.goducky.lordpipon.com. Available models and tools depend on the connections configured by the service administrator."],
+      },
+    ],
+  },
+  {
     id: "gui",
     category: "Interfaces",
     title: "GUI Desktop App",
@@ -487,6 +503,7 @@ export default function DocsView() {
               {active.title}
             </h2>
             <p className="text-sm text-text-weak mb-6">{active.desc}</p>
+            {active.id === "webui" && <a href="https://web.goducky.lordpipon.com" className="btn-primary mb-6">Open WebUI</a>}
 
             {active.content.map((section, i) => (
               <section key={i} className="mb-8">

@@ -79,8 +79,8 @@ export default function AboutPage() {
               </h2>
               <p className="text-sm leading-relaxed mb-3">
                 GoDucky is an open source AI coding agent that helps you write,
-                understand, and refactor code — available today as a CLI, with
-                a GUI desktop app and WebUI coming soon. Our goal is to put
+                understand, and refactor code — available today as a CLI and
+                WebUI, with a desktop GUI in development. Our goal is to put
                 reliable, privacy-first AI coding assistance in every
                 developer&apos;s hands, for free, and to make it work with any
                 model you already pay for.

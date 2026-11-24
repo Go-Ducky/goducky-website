@@ -8,8 +8,8 @@
   --color-background-weak-hover: hsl(0, 8%, 94%);
   --color-background-strong: hsl(0, 5%, 12%);
   --color-background-strong-hover: hsl(0, 5%, 18%);
-  --color-background-interactive: hsl(62, 84%, 88%);
-  --color-background-interactive-weaker: hsl(64, 74%, 95%);
+  --color-background-interactive: #000;
+  --color-background-interactive-weaker: hsl(0, 0%, 94%);
   --color-text: hsl(0, 1%, 39%);
   --color-text-weak: hsl(0, 1%, 60%);
   --color-text-weaker: hsl(30, 2%, 81%);
@@ -26,8 +26,8 @@
   --color-background-weak-hover: hsl(0, 6%, 15%);
   --color-background-strong: hsl(0, 15%, 94%);
   --color-background-strong-hover: hsl(0, 15%, 97%);
-  --color-background-interactive: hsl(62, 100%, 90%);
-  --color-background-interactive-weaker: hsl(60, 20%, 8%);
+  --color-background-interactive: #fff;
+  --color-background-interactive-weaker: hsl(0, 0%, 12%);
   --color-text: hsl(0, 4%, 71%);
   --color-text-weak: hsl(0, 2%, 49%);
   --color-text-weaker: hsl(0, 3%, 28%);
@@ -61,7 +61,7 @@ body {
 
 ::selection {
   background: var(--color-background-interactive);
-  color: var(--color-text-strong);
+  color: var(--color-text-inverted);
 }
 
 a {

@@ -4,6 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-background">
       <div className="hidden md:flex border-t border-border-weak">
+        <a href="https://web.goducky.lordpipon.com" className="flex-1 text-center py-5 text-sm text-text-strong hover:bg-background-weak transition-colors no-underline">WebUI</a>
         <a
           href="https://github.com/go-ducky"
           target="_blank"

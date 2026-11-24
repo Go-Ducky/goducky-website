@@ -22,6 +22,7 @@ export default function Header() {
       </Link>
 
       <nav className="hidden md:flex items-center gap-5">
+        <a href="https://web.goducky.lordpipon.com" className="text-sm text-text-strong no-underline">WebUI</a>
         <a
           href="https://github.com/go-ducky"
           target="_blank"
@@ -65,6 +66,7 @@ export default function Header() {
 
       {menuOpen && (
         <div className="absolute top-20 left-0 right-0 bg-background border-b border-border-weak p-5 flex flex-col gap-4 md:hidden">
+          <a href="https://web.goducky.lordpipon.com" className="text-sm text-text-strong no-underline" onClick={() => setMenuOpen(false)}>WebUI</a>
           <a
             href="https://github.com/go-ducky"
             target="_blank"
