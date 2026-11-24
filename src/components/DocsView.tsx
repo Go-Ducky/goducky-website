@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronDown, ChevronRight, Search, Check, Copy } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, Check, Copy, Rocket, Terminal, Monitor, FileText, type LucideIcon } from "lucide-react";
 
 interface DocSection {
   heading: string;
@@ -354,10 +354,10 @@ const DOCS: DocItem[] = [
   },
 ];
 
-const CATEGORY_ICONS: Record<string, string> = {
-  "Getting Started": "🚀",
-  "CLI Reference": "💻",
-  Interfaces: "🖥️",
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  "Getting Started": Rocket,
+  "CLI Reference": Terminal,
+  Interfaces: Monitor,
 };
 
 function CodeBlock({ code }: { code: string }) {
@@ -458,6 +458,7 @@ export default function DocsView() {
           <nav className="space-y-1">
             {filtered.map(([cat, items]) => {
               const expanded = expandedCategories.includes(cat);
+              const CategoryIcon = CATEGORY_ICONS[cat] ?? FileText;
               return (
                 <div key={cat} className="border border-border-weak rounded-md overflow-hidden">
                   <button
@@ -465,7 +466,7 @@ export default function DocsView() {
                     className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-text-strong hover:bg-background-weak cursor-pointer"
                   >
                     <span className="flex items-center gap-2">
-                      <span>{CATEGORY_ICONS[cat]}</span>
+                      <CategoryIcon size={15} aria-hidden="true" />
                       {cat}
                     </span>
                     {expanded ? (
