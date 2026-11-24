@@ -6,8 +6,8 @@ export default function Privacy() {
           Built for privacy first
         </h3>
         <p className="text-text leading-relaxed">
-          GoDucky does not store any of your code or context data, so that it
-          can operate in privacy sensitive environments.{" "}
+          CLI sessions stay on your device. WebUI saves your conversations in your
+          account; Anonymous Chat keeps conversations out of chat history.{" "}
           <a
             href="/privacy"
             className="text-text-weak hover:text-text-strong underline underline-offset-[3px]"

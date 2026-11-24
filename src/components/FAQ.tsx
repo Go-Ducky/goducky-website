@@ -37,12 +37,12 @@ const faqItems = [
   {
     question: "What about data and privacy?",
     answer:
-      "Your data and information is only stored when you use our free models or create sharable links. Learn more about our privacy policy.",
+      "The CLI stores sessions locally. WebUI stores saved conversations in your account, while Anonymous Chat does not save conversations to history. Connected providers handle model requests under their own policies.",
   },
   {
     question: "Is GoDucky open source?",
     answer:
-      "Yes, GoDucky is fully open source. The source code is public on GitHub under the MIT License, which means anyone can use, modify, or contribute to its development.",
+      "GoDucky source code is available in the Go-Ducky GitHub organization. See each repository for its source, license, and contribution instructions.",
   },
 ];
 
